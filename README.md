@@ -1,2 +1,68 @@
-# BVSelect
- Jquery Plugin
+BVSelect - Jquery Plugin
+-
+
+This plugin replaces native select elements with fully customizable dropdowns.
+
+Even though this replaces native select options, you can still use <b>Form Submit</b>, <b>Onchange Events</b> and <b>Attributes</b> as you would with normal usage.
+
+Demo Page: http://bvcode.pt/code/plugins/bvselect/
+
+Installation:
+-
+
+1 - Include jQuery Plugin.
+```javascript
+<script src="path/to/jquery.js"></script> 
+<script src="path/to/bvselect.js"></script>
+```
+2 - Include Plugin Styles.
+```javascript
+<link rel="stylesheet" href="path/to/bvselect.css">
+```
+4 - Set HTML.
+```javascript
+<select id="selectbox">
+  <option data-separator="true"> Select Option </option>
+  <option value="1"> Option 1 </option>
+  <option value="2"> Option 2 </option>
+  <option value="3" disabled> Option 3 </option>
+  <option value="4"> Option 4 </option>
+</select>
+```
+3 - Initilize Plugin.
+```javascript
+$(document).ready(function() {
+  $('#selectbox').BVSelect({
+      width: "200px"
+  });
+});
+```
+
+
+Methods:
+-
+
+Currently BVSelect supports two methods.
+
+<b>Destroy:</b>
+```javascript
+$('#selectbox').BVSelect("destroy");
+```
+Removes dropdown, unbinds all its events and brings back the original Select
+
+<b>Update:</b>
+```javascript
+$('#selectbox').BVSelect("update");
+```
+Updates current dropdown based on changes to the original selectbox.
+
+
+Options:
+-
+
+You can specify the width of the main element
+```javascript
+$('#selectbox').BVSelect({
+      width: "200px" // Pixel, Percentage, etc...
+});
+```
