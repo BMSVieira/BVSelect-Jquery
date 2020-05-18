@@ -27,20 +27,20 @@
           if (parameters == 'update') {
             this.each(function() {
 
-			 		var maindiv = $(this).next(".bv_mainselect");
-			 		var width_existente = $(this).next(".bv_mainselect").width() + "px"; 
-              	var id_generated = $(this).next(".bv_mainselect").children().attr("id");
-              	id_generated = id_generated.replace("main_", "ul_");
+			 	var maindiv = $(this).next(".bv_mainselect");
+			 	var width_existente = $(this).next(".bv_mainselect").width() + "px"; 
+	          	var id_generated = $(this).next(".bv_mainselect").children().attr("id");
+	          	id_generated = id_generated.replace("main_", "ul_");
 
-             	maindiv.remove();
+	         	maindiv.remove();
 
-              	// Configurações do Element existente
-                var parameters = {
+	          	// Configurações do Element existente
+	            var parameters = {
 				    	width: width_existente 
 				}
 				console.log(parameters);
-        		// Chama a função para começar a fazer o update
-       		    CriarBVSelect(select, parameters);
+	    		// Chama a função para começar a fazer o update
+	   		    CriarBVSelect(select, parameters);
             });
           } 
           return this;
@@ -48,7 +48,7 @@
         // ** ---------- FIM METODOS ----------- **
         // Esconde o select nativo 
         $(this).hide();
-        
+
         // Chama a função para começar a fazer o update
         CriarBVSelect(select, parameters);
 
