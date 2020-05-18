@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>
+		BVSelect - jquery Plugin
+	</title>
+
+	<!-- BVSelect Plugin Style -->
+	<link rel="stylesheet" type="text/css" href="css/bvselect.css">
+
+</head>
+<body style="margin:50px; padding:50px;">
+
+		<h1>Lorem Ipsum</h1>
+		<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+		tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+		quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+		consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+		cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+		proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+
+			<select id="selectbox">
+				<option data-separator="true" value="##">Selecionar Opção</option>
+				<option value="pt_1" selected>Opção 1</option>
+				<option value="en_2" >Opção 2 </option>
+				<option value="es_3" disabled>Opção 3</option>
+				<option value="ch_4">Opção 4</option>
+				<option value="5">Opção 5</option>
+			</select>
+
+		<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+		tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+		quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+		consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+		cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+		proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+
+			<select id="selectbox2">
+				<option data-separator="true" value="##">Selecionar Opção</option>
+				<option value="pt_1" selected>Opção 1</option>
+				<option value="en_2" >Opção 2 </option>
+				<option value="es_3" disabled>Opção 3</option>
+				<option value="ch_4">Opção 4</option>
+				<option value="5">Opção 5</option>
+			</select>
+
+		<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+		tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+		quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+		consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+		cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+		proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+
+		<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+		tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+		quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+		consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+		cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+		proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+
+</body>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+<!-- BVSelect Plugin -->
+<script src="js/bvselect.js"></script>
+
+<script>
+$(document).ready(function() {
+ 	
+ 	$('#selectbox').BVSelect({
+    	width: "200px"
+	});
+
+	$('#selectbox2').BVSelect({
+    	width: "500px"
+	});
+
+});
+</script>
+
+</html>
