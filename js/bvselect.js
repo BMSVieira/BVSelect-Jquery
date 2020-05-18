@@ -59,7 +59,7 @@
             options.after($('<div id="bv_'+randomID+'" data-search="'+config.searchbox+'" style="width:'+config.width+';"></div>').addClass('bv_mainselect ').addClass(options.attr('class') || '').addClass(options.attr('disabled') ? 'disabled' : '').attr('tabindex', options.attr('disabled') ? null : '0'));
             $("#bv_"+randomID).append('<div id="main_'+randomID+'" class="bv_atual bv_background"></div><ul id="ul_'+randomID+'" class="bv_ul_inner bv_background"></ul>');
 
-            if(config.searchbox == true){ $("#ul_"+randomID).prepend('<li class="nofocus"><input placeholder="Search..." class="bv_input" id="input_'+randomID+'" type="text"></li>'); }
+            if(config.searchbox == true){ $("#ul_"+randomID).prepend('<li class="nofocus"><div class="innerinput"><input placeholder="Search..." class="bv_input" id="input_'+randomID+'" type="text"></div</li>'); }
 
 	          var select_width = $("#main_"+randomID).width();
 	          $( "#ul_"+randomID).css("width", select_width+20+"px");
