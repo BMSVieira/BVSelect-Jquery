@@ -8,9 +8,7 @@
 		        var selected = $("option", this);
 		        var randomID = Math.floor(Math.random() * (1000 - 0 + 1) ) + 0;
 
-
 		        // ** ---------- INICIO METODOS ----------- **
-
 		        if (typeof parameters == 'string') {  
 
 				          // ** DESTROY **
@@ -25,7 +23,6 @@
 
 				            });
 				          } 
-
 				          // ** UPDATE **  
 				          if (parameters == 'update') {
 				            this.each(function() {
@@ -85,7 +82,6 @@
 		                if($(this).data('separator') == true) { var is_separator = "bv_separator"} else { is_separator = ""}
 
 		                    $( "#ul_"+randomID).append("<li class='"+ is_disabled  +" "+ is_separator  +"'  >"+$(this).text()+"</li>");
-		                
 		              });
 
 		              // ** ESCONDE OPCOES ** 
@@ -106,7 +102,7 @@
 		                if($(this).hasClass("bv_disabled") || $(this).hasClass("bv_separator"))
 		                {} else {
 
-		                  $("#main_"+randomID).html($(this).text()+" <i id='arrow_"+randomID+"' class='arrow down'></i>");
+		                  $("#main_"+randomID).html($(this).text()+" <i id='arrow_"+randomID+"' class='arrows_bv arrow down'></i>");
 		                  $("#"+selectorID).prop("selectedIndex", index).trigger("change");
 		                  $("#ul_"+randomID).slideUp("fast");
 		                }
