@@ -98,3 +98,6 @@ Developed by: Bruno Vieira
 {
 	padding: 0px 9px 0px 10px;
 }
+*:focus {
+    outline: none!important;
+}
