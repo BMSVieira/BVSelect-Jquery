@@ -86,7 +86,7 @@
               	if($(this).hasClass("nofocus") == false)
               	{
 	                var index = $(this).index();
-	                if($(this).hasClass("bv_disabled") || $(this).hasClass("bv_separator"))
+	                if($(this).hasClass("bv_disabled"))
 	                {} else {
 
 	                  $("#main_"+randomID).html($(this).text()+" <i id='arrow_"+randomID+"' class='arrows_bv arrow down'></i>");
