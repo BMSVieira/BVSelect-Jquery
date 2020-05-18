@@ -45,12 +45,10 @@
 		          } 
 		          return this;
         }
-        
         // ** ---------- FIM METODOS ----------- **
-
         // Esconde o select nativo 
         $(this).hide();
-
+        
         // Chama a função para começar a fazer o update
         CriarBVSelect(select, parameters);
 
