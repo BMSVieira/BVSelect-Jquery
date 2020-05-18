@@ -4,7 +4,6 @@ BVSelect Jquery Plugin Styles
 Developed by: Bruno Vieira
 
 **************************** */
-
 .bv_mainselect {
 	color: #fff;
 	padding: 7px 5px 7px 5px;
@@ -12,7 +11,6 @@ Developed by: Bruno Vieira
 	font-family: Arial;
 	font-size: 10pt
 }
-
 .bv_atual {
 	color: #535353;
 	font-size: 11pt;
@@ -21,21 +19,17 @@ Developed by: Bruno Vieira
 	border-radius: 6px;
 	cursor: pointer
 }
-
 .bv_disabled {
 	background-color: #e6e6e6!important;
 	cursor: default!important
 }
-
 .bv_separator {
 	font-weight: 700;
 	color: #282828!important
 }
-
 .bv_background {
 	background-color: #fff
 }
-
 .arrow {
 	border: solid grey;
 	border-width: 0 3px 3px 0;
@@ -43,21 +37,18 @@ Developed by: Bruno Vieira
 	padding: 3px;
 	float: right
 }
-
 .up {
 	transform: rotate(-135deg);
 	-webkit-transform: rotate(-135deg);
 	margin-top: 5px;
 	transition: all .2s ease
 }
-
 .down {
 	transition: all .2s ease;
 	transform: rotate(45deg);
 	-webkit-transform: rotate(45deg);
 	margin-top: 2px
 }
-
 .bv_ul_inner {
 	position: absolute;
 	margin-top: 10px;
@@ -68,7 +59,6 @@ Developed by: Bruno Vieira
 	display: none;
 	z-index: 1
 }
-
 .bv_ul_inner li {
     cursor: pointer;
     list-style: none;
@@ -78,7 +68,6 @@ Developed by: Bruno Vieira
     font-size: 10pt;
 	padding: 12px 28px 10px 10px;
 }
-
 .bv_ul_inner li input
 {
 	padding: 0px;
@@ -96,18 +85,15 @@ Developed by: Bruno Vieira
 	font-size: 10pt;
 	font-weight: bold;
 }
-
 .bv_ul_inner li:hover {
 	background-color: #eee
 }
-
 .nofocus
 {
 	background-color: rgba(255, 255, 255, 0.1) !important;
 	padding: 0px !important;
 	border-bottom: 2px solid #e1e1e1;
 }
-
 .innerinput
 {
 	padding: 0px 9px 0px 10px;

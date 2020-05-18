@@ -1,4 +1,3 @@
-
 (function($) {
   $.fn.BVSelect = function(parameters) {
 
