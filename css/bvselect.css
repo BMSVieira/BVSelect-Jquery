@@ -70,15 +70,32 @@ Developed by: Bruno Vieira
 }
 
 .bv_ul_inner li {
-	cursor: pointer;
-	list-style: none;
-	color: #353535;
-	padding: 5px 0 5px 9px;
-	font-family: arial;
-	font-size: 10pt;
-	padding: 10px
+    cursor: pointer;
+    list-style: none;
+    color: #353535;
+    padding: 5px 0 5px 9px;
+    font-family: arial;
+    font-size: 10pt;
+	padding: 12px 28px 10px 10px;
+}
+
+.bv_ul_inner li input
+{
+	width: 100%;
+	padding: 10px;
+	border: 0px;
+	border-bottom-color: currentcolor;
+	border-bottom-style: none;
+	border-bottom-width: 0px;
+	border-bottom: 1px solid #cecece;
+	color: black;
 }
 
 .bv_ul_inner li:hover {
 	background-color: #eee
+}
+
+.nofocus
+{
+	background-color:transparent!important;
 }

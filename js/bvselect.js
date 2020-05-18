@@ -14,13 +14,11 @@
           // ** DESTROY **
           if (parameters == 'destroy') {
             this.each(function() {
-
               var divselect = $(this).next('.bv_mainselect');
               if (divselect.length > 0) {
                 divselect.remove();
                 select.css('display', 'block');
               }
-
             });
           } 
           // ** UPDATE **  
@@ -32,13 +30,16 @@
 	          	var id_generated = $(this).next(".bv_mainselect").children().attr("id");
 	          	id_generated = id_generated.replace("main_", "ul_");
 
+				var searchbox = $(this).next(".bv_mainselect").data('search');
+
 	         	maindiv.remove();
 
 	          	// Configurações do Element existente
 	            var parameters = {
-				    	width: width_existente 
+				    	width: width_existente,
+				    	searchbox: searchbox
 				}
-				console.log(parameters);
+
 	    		// Chama a função para começar a fazer o update
 	   		    CriarBVSelect(select, parameters);
             });
@@ -46,6 +47,7 @@
           return this;
         }
         // ** ---------- FIM METODOS ----------- **
+
         // Esconde o select nativo 
         $(this).hide();
 
@@ -54,64 +56,61 @@
 
         function CriarBVSelect(options, config)
         {
-              // ** CONSTROI ELEMENTOS ** 
-                options.after($('<div style="width:'+config.width+';"></div>')
-                    .addClass('bv_mainselect ')
-                    .addClass(options.attr('class') || '')
-                    .addClass(options.attr('disabled') ? 'disabled' : '')
-                    .attr('tabindex', options.attr('disabled') ? null : '0')
-                    .html('<div id="main_'+randomID+'" class="bv_atual bv_background"></div><ul id="ul_'+randomID+'" class="bv_ul_inner bv_background"></ul>')
-                 );
+       		// ** CONSTROI ELEMENTOS ** 
+            options.after($('<div id="bv_'+randomID+'" data-search="'+config.searchbox+'" style="width:'+config.width+';"></div>').addClass('bv_mainselect ').addClass(options.attr('class') || '').addClass(options.attr('disabled') ? 'disabled' : '').attr('tabindex', options.attr('disabled') ? null : '0'));
+            $("#bv_"+randomID).append('<div id="main_'+randomID+'" class="bv_atual bv_background"></div><ul id="ul_'+randomID+'" class="bv_ul_inner bv_background"></ul>');
 
-              var select_width = $("#main_"+randomID).width();
-              $( "#ul_"+randomID).css("width", select_width+20+"px");
+            if(config.searchbox == true){ $("#ul_"+randomID).prepend('<li class="nofocus"><input placeholder="Search..." class="bv_input" id="input_'+randomID+'" type="text"></li>'); }
 
-              var selected_option = options.find("option:selected").text();
-              $("#main_"+randomID).html(selected_option+"<i id='arrow_"+randomID+"' class='arrows_bv arrow down'></i>");
+	        var select_width = $("#main_"+randomID).width();
+	        $( "#ul_"+randomID).css("width", select_width+20+"px");
+
+            var selected_option = options.find("option:selected").text();
+            $("#main_"+randomID).html(selected_option+"<i id='arrow_"+randomID+"' class='arrows_bv arrow down'></i>");
             
-              options.find("option").each(function(index,element) 
-              { 
+            options.find("option").each(function(index,element) 
+            { 
                 if(element.disabled == true) { var is_disabled = "bv_disabled"} else { is_disabled = ""}
                 if($(this).data('separator') == true) { var is_separator = "bv_separator"} else { is_separator = ""}
+                $( "#ul_"+randomID).append("<li class='"+ is_disabled  +" "+ is_separator  +"'  >"+$(this).text()+"</li>");
+            });
+            // ** ESCONDE OPCOES ** 
+            $("#main_"+randomID).click(function () {
+	               	$(".bv_ul_inner").hide();
+	                $("#ul_"+randomID).slideDown("fast");
+	                $(".arrows_bv").removeClass("up").addClass("down");
+	                $("#arrow_"+randomID).removeClass("down").addClass("up");
+            });
+            // ** MUDA OPCAO ** 
+            $("#ul_"+randomID).children().click(function () {
+              	if($(this).hasClass("nofocus") == false)
+              	{
+	                var index = $(this).index();
+	                if($(this).hasClass("bv_disabled") || $(this).hasClass("bv_separator"))
+	                {} else {
 
-                    $( "#ul_"+randomID).append("<li class='"+ is_disabled  +" "+ is_separator  +"'  >"+$(this).text()+"</li>");
-              });
-
-              // ** ESCONDE OPCOES ** 
-              $("#main_"+randomID).click(function () {
-
-                $(".bv_ul_inner").hide();
-                $("#ul_"+randomID).slideDown("fast");
-                $(".arrows_bv").removeClass("up").addClass("down");
-                $("#arrow_"+randomID).removeClass("down").addClass("up");
-
-              });
-
-              // ** MUDA OPCAO ** 
-              $("#ul_"+randomID).children().click(function () {
-
-                var index = $(this).index();
-
-                if($(this).hasClass("bv_disabled") || $(this).hasClass("bv_separator"))
-                {} else {
-
-                  $("#main_"+randomID).html($(this).text()+" <i id='arrow_"+randomID+"' class='arrows_bv arrow down'></i>");
-                  $("#"+selectorID).prop("selectedIndex", index).trigger("change");
-                  $("#ul_"+randomID).slideUp("fast");
-                }
-              });
-
-              // ** ESCONDE QUANDO CLICA FORA ** 
-              $(document).on('click.bv_mainselect', function(event) {
+	                  $("#main_"+randomID).html($(this).text()+" <i id='arrow_"+randomID+"' class='arrows_bv arrow down'></i>");
+	                  $("#"+selectorID).prop("selectedIndex", index).trigger("change");
+	                  $("#ul_"+randomID).slideUp("fast");
+	                }
+              	}
+            });
+	        // ** PROCURA POR RESULTADOS **
+			$("#input_"+randomID).on("keyup", function() {
+					var value = this.value.toLowerCase().trim();
+					$("#ul_"+randomID+" li").show().filter(function() {
+		              	if($(this).hasClass("nofocus") == false){ return $(this).text().toLowerCase().trim().indexOf(value) == -1;}
+					}).hide();
+			});
+            // ** ESCONDE QUANDO CLICA FORA ** 
+            $(document).on('click.bv_mainselect', function(event) {
                 if ($(event.target).closest('.bv_mainselect').length === 0) {
-                $("#ul_"+randomID).hide();
-                $("#arrow_"+randomID).removeClass("up").addClass("down");
+                	$("#ul_"+randomID).hide();
+                	$("#arrow_"+randomID).removeClass("up").addClass("down");
                 }
-              });
+            });
         }
-
     return this;
-
   };
 
 }(jQuery));
