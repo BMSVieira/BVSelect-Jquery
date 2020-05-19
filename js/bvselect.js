@@ -23,14 +23,14 @@
           if (parameters == 'update') {
             this.each(function() {
 
-        			 	var maindiv = $(this).next(".bv_mainselect");
-        			 	var width_existente = $(this).next(".bv_mainselect").width() + "px"; 
-        	      var id_generated = $(this).next(".bv_mainselect").children().attr("id");
-        	      id_generated = id_generated.replace("main_", "ul_");
+        			var maindiv = $(this).next(".bv_mainselect");
+        			var width_existente = $(this).next(".bv_mainselect").width() + "px"; 
+        	    var id_generated = $(this).next(".bv_mainselect").children().attr("id");
+        	    id_generated = id_generated.replace("main_", "ul_");
 
-        				var searchbox = $(this).next(".bv_mainselect").data('search');
+        			var searchbox = $(this).next(".bv_mainselect").data('search');
 
-	         	maindiv.remove();
+	         	  maindiv.remove();
 
 	          	// Configurações do Element existente
 	            var parameters = {
@@ -92,8 +92,7 @@
 	                  $("#main_"+randomID).html($(this).text()+" <i id='arrow_"+randomID+"' class='arrows_bv arrow down'></i>");
 	                  $("#"+selectorID).prop("selectedIndex", index).trigger("change");
 	                  $("#ul_"+randomID).slideUp("fast");
-                    $("#input_"+randomID).val("");
-                    $("#input_"+randomID).keyup();
+                    $("#input_"+randomID).val("").keyup();
 	                }
               	}
             });
@@ -111,6 +110,7 @@
               if ($(event.target).closest('.bv_mainselect').length === 0) {
               	$("#ul_"+randomID).hide();
               	$("#arrow_"+randomID).removeClass("up").addClass("down");
+                $(".bv_input").val("").keyup();
               }
           });
         }
