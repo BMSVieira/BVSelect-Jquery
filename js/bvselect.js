@@ -9,7 +9,7 @@
         // ** ---------- INICIO METODOS ----------- **
         if (typeof parameters == 'string') {
 
-            // ** DESTROY **
+            // ** DESTRUIR **
             if (parameters == 'destroy') {
                 this.each(function() {
                     var divselect = $(this).next('.bv_mainselect');
@@ -19,7 +19,7 @@
                     }
                 });
             }
-            // ** UPDATE **  
+            // ** ATUALIZAR **  
             if (parameters == 'update') {
                 this.each(function() {
 
@@ -49,7 +49,7 @@
         // Esconde o select nativo 
         $(this).hide();
 
-        // Chama a função para começar a fazer o update
+        // Chama a função para construir os elementos
         CriarBVSelect(select, parameters);
 
         function CriarBVSelect(options, config) {
@@ -107,7 +107,7 @@
             $("#input_" + randomID).on("keyup", function() {
                 var value = this.value.toLowerCase().trim();
                 $("#ul_" + randomID + " li").show().filter(function() {
-                    if ($(this).hasClass("nofocus") == false) {
+                    if ($(this).hasClass("nofocus") == false) { // Se tiver classe nofocus, não procura nesse.
                         return $(this).text().toLowerCase().trim().indexOf(value) == -1;
                     }
                 }).hide();
