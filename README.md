@@ -33,7 +33,8 @@ Installation:
 ```javascript
 $(document).ready(function() {
   $('#selectbox').BVSelect({
-      width: "200px"
+      width: "200px",
+      searchbox: false
   });
 });
 ```
@@ -63,6 +64,24 @@ Options:
 You can specify the width of the main element
 ```javascript
 $('#selectbox').BVSelect({
-      width: "200px" // Pixel, Percentage, etc...
+      width: "200px", // Pixel, Percentage, etc...
+      searchbox: true // true or false to add searchbox to dropdown
 });
 ```
+
+
+Frequently Asked Questions
+-
+
+<b>Is there any themes?</b>
+
+It doesn't need themes since the CSS is fully customizable, you are able to change everything to match your style.
+
+<b>In addition to design, what changes?</b>
+
+This plugin replaces the original SelectBox but you can use it as you would with a native one, OnChange Events, Attributes, Form Submit, Append/Remove Options, everything.
+
+<b>What about Browser Compatibility?</b>
+
+It was tested successfully in every modern browser as well as IE 11
+
