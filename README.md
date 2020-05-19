@@ -5,7 +5,7 @@ This plugin replaces native select elements with fully customizable dropdowns.
 
 Even though this replaces native select options, you can still use <b>Form Submit</b>, <b>Onchange Events</b> and <b>Attributes</b> as you would with normal usage.
 
-Demo Page: http://bvcode.pt/code/plugins/bvselect/
+Demo Page: https://bmsvieira.github.io/BVSelect/
 
 Installation:
 -
