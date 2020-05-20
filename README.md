@@ -1,8 +1,9 @@
 BVSelect - Jquery Plugin
 --
-<div style='text-align:center;'>
-<img src="http://bvcode.pt/code/plugins/bvselect/images/BV.png">
-</div>
+<p align="center">
+<img width="600" src="http://bvcode.pt/code/plugins/bvselect/images/BV.png">
+</p>
+<br>
 
 This plugin replaces native select elements with fully customizable dropdowns.
 
