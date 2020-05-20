@@ -36,10 +36,7 @@ Installation:
 3 - Initilize Plugin.
 ```javascript
 $(document).ready(function() {
-  $('#selectbox').BVSelect({
-      width: "200px",
-      searchbox: false
-  });
+  $('#selectbox').BVSelect();
 });
 ```
 
