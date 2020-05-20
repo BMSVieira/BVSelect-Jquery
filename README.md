@@ -74,6 +74,25 @@ $(document).ready(function() {
   });
 });
 ```
+Attributes:
+-
+| Name | Value | Description |
+| --- | --- | --- |
+| `data-separator` | *true* or *false* | Highlight an option |
+| `data-img` | *Image Source* |  Adds an image to option |
+| `disabled (native)` | *disabled* |  Disable an option |
+
+<b>Example:</b>
+```html
+<select id="selectbox3">
+    <option value="##" data-separator="true" selected>Select Option</option>
+    <option data-img="path/to/img.png" value="--">Cristiano Ronaldo</option>
+    <option data-img="path/to/img.png" value="--" >Lionel Messi </option>
+    <option data-img="path/to/img.png" value="--" disabled>Neymar Jr. (Disabled)</option>
+    <option data-img="path/to/img.png" value="--">Ronaldinho</option>
+    <option data-img="path/to/img.png" value="--">Luis Figo</option>
+</select>
+```
 
 Frequently Asked Questions
 -
