@@ -93,6 +93,7 @@ Attributes:
     <option data-img="path/to/img.png" value="--">Luis Figo</option>
 </select>
 ```
+*All CSS styles are fully customizable in order to match your style*
 
 Frequently Asked Questions
 -
