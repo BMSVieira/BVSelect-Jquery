@@ -8,24 +8,25 @@
 
 	<!-- BVSelect Plugin Style -->
 	<link rel="stylesheet" type="text/css" href="css/bvselect.css">
+<style>
 
+html,body
+{
+	font-family:Arial;
+}
+
+</style>
 </head>
 <body style="margin:50px; padding:50px;">
 
 		<h1>Lorem Ipsum</h1>
 
-		<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-		tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-		quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-		consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-		cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-		proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-		<h3><b>Original:</b></h3>
+		<h3>Original:</h3>
 			<select>
 				<option data-separator="true" value="##">Select Option</option>
 				<option value="pt_1" selected>Option 1</option>
 				<option value="en_2" >Option 2 </option>
-				<option value="es_3" disabled>Option 3</option>
+				<option value="es_3" disabled>Option 3 (Disabled)</option>
 				<option value="ch_4">Option 4</option>
 				<option value="5">Option 5</option>
 			</select>
@@ -36,12 +37,12 @@
 		consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
 		cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
 		proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-		<h3><b>BVSelect Jquery Plugin:</b></h3>
+		<h3>Basic:</h3>
 			<select id="selectbox">
 				<option data-separator="true" value="##">Select Option</option>
 				<option value="pt_1" selected>Option 1</option>
 				<option value="en_2" >Option 2 </option>
-				<option value="es_3" disabled>Option 3</option>
+				<option value="es_3" disabled>Option 3 (Disabled)</option>
 				<option value="ch_4">Option 4</option>
 				<option value="5">Option 5</option>
 			</select>
@@ -52,9 +53,10 @@
 		consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
 		cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
 		proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-		<h3><b>...width Searchbox:</b></h3>
+		<h3>Searchbox:</h3>
 			<select id="selectbox2">
-				<option value="pt_1" selected>Cristiano Ronaldo</option>
+				<option value="##" data-separator="true" selected>Select Option</option>
+				<option value="pt_1">Cristiano Ronaldo</option>
 				<option value="en_2" >Lionel Messi </option>
 				<option value="es_3" >Neymar Jr.</option>
 				<option value="ch_4">Ronaldinho</option>
@@ -68,6 +70,16 @@
 		cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
 		proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
 
+		<h3>Searchbox & Images:</h3>
+			<select id="selectbox3">
+				<option value="##" data-separator="true" selected>Select Option</option>
+				<option data-img="https://img.icons8.com/color/2x/portugal.png" value="pt_1">Cristiano Ronaldo</option>
+				<option data-img="https://img.icons8.com/color/2x/argentina.png" value="en_2" >Lionel Messi </option>
+				<option data-img="https://img.icons8.com/color/2x/brazil.png" value="es_3" disabled>Neymar Jr. (Disabled)</option>
+				<option data-img="https://img.icons8.com/color/2x/brazil.png" value="ch_4">Ronaldinho</option>
+				<option data-img="https://img.icons8.com/color/2x/portugal.png" value="5">Luis Figo</option>
+			</select>
+
 		<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
 		tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
 		quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
@@ -75,6 +87,32 @@
 		cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
 		proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
 
+		<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+		tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+		quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+		consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+		cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+		proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+
+		<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+		tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+		quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+		consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+		cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+		proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+				<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+		tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+		quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+		consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+		cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+		proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+
+		<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+		tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+		quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+		consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+		cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+		proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
 </body>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -94,6 +132,10 @@ $(document).ready(function() {
     	searchbox: true
 	});
 
+	$('#selectbox3').BVSelect({
+    	width: "500px",
+    	searchbox: true
+	});
 });
 </script>
 

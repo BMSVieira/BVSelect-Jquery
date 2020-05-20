@@ -7,13 +7,16 @@
 
         // SETUP LIST
         function SetListBV(options) {
+
             options.find("option").each(function(index, element) {
                 // Separator Element
                 if (element.disabled == true) { var is_disabled = "bv_disabled" } else { is_disabled = "" }
                 // Disabled Element   
                 if ($(this).data('separator') == true) { var is_separator = "bv_separator" } else { is_separator = "" }
+                // Check for Image  
+                if($(this).data('img')){  var has_img = "<img src="+$(this).data('img')+">"; } else { var has_img = "";}
                 // Apend li to ul
-                $("#ul_" + randomID).append("<li class='" + is_disabled + " " + is_separator + "'  >" + $(this).text() + "</li>");
+                $("#ul_" + randomID).append("<li class='" + is_disabled + " " + is_separator + "'  > "+has_img+" " + $(this).text() + "</li>");
             });
 
             // ** MAIN DIV CLICK ** 
