@@ -8,16 +8,11 @@
         // SETUP LIST
         function SetListBV(options) {
             options.find("option").each(function(index, element) {
-                if (element.disabled == true) {
-                    var is_disabled = "bv_disabled"
-                } else {
-                    is_disabled = ""
-                }
-                if ($(this).data('separator') == true) {
-                    var is_separator = "bv_separator"
-                } else {
-                    is_separator = ""
-                }
+                // Separator Element
+                if (element.disabled == true) { var is_disabled = "bv_disabled" } else { is_disabled = "" }
+                // Disabled Element   
+                if ($(this).data('separator') == true) { var is_separator = "bv_separator" } else { is_separator = "" }
+                // Apend li to ul
                 $("#ul_" + randomID).append("<li class='" + is_disabled + " " + is_separator + "'  >" + $(this).text() + "</li>");
             });
 
