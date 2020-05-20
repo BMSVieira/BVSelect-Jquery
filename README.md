@@ -65,6 +65,15 @@ Settings:
 | `width` | *px* or *%* | Specify the with of the main element|
 | `searchbox` | *true* or *false* |  Add a searchbox to the list |
 
+<b>Example:</b>
+```javascript
+$(document).ready(function() {
+  $('#selectbox').BVSelect({
+      width: "33%",
+      searchbox: false
+  });
+});
+```
 
 Frequently Asked Questions
 -
