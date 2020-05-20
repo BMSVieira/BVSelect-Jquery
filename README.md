@@ -58,16 +58,12 @@ $('#selectbox').BVSelect("update");
 Updates current dropdown based on changes to the original selectbox.
 
 
-Options:
+Settings:
 -
-
-You can specify the width of the main element
-```javascript
-$('#selectbox').BVSelect({
-      width: "200px", // Pixel, Percentage, etc...
-      searchbox: true // true or false to add searchbox to dropdown
-});
-```
+| Name | Value | Description |
+| --- | --- | --- |
+| `width` | *px* or *%* | Specify the with of the main element|
+| `searchbox` | *true* or *false* |  Add a searchbox to the list |
 
 
 Frequently Asked Questions
@@ -84,4 +80,3 @@ This plugin replaces the original SelectBox but you can use it as you would with
 <b>What about Browser Compatibility?</b>
 
 It was tested successfully in every modern browser as well as IE 11
-
