@@ -114,10 +114,18 @@
 
                     // Fetches fields and append to main div
                     SetListBV(select);
-
                 });
             }
             return this;
+        } else {
+
+            // Default Parameters
+            var defaults = {
+                width : "100%", // Width 100%
+                searchbox : false // Searchbox not included
+            }
+
+            var parameters = $.extend({}, defaults, parameters); 
         }
         // ** ---------- END METHODS ----------- **
 
