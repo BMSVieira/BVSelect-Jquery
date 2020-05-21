@@ -52,6 +52,8 @@
                     $("#arrow_" + randomID).removeClass("up").addClass("down");
                     $(".bv_input").val("").keyup();
                     selectedIDFocus = 0;
+                    FixVerticalViewPort();
+
                 }
             });
         }
@@ -121,7 +123,8 @@
         {
             var currentWindowView = $(window).scrollTop() + $(window).height();
             var currentElementView = $("#ul_"+randomID+" li:last-child").offset().top;
-            if(currentElementView+5 > currentWindowView)
+            // +50 to fix outer border
+            if(Math.round(currentElementView+50) > Math.round(currentWindowView))
             {
                 selectedIDFocus = randomID;
                 $("#ul_" + randomID).css("position", "fixed");
