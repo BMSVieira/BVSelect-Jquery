@@ -44,8 +44,6 @@ $(document).ready(function() {
 Methods:
 -
 
-Currently BVSelect supports two methods.
-
 <b>Destroy:</b>
 ```javascript
 $('#selectbox').BVSelect("destroy");
@@ -58,6 +56,11 @@ $('#selectbox').BVSelect("update");
 ```
 Updates current dropdown based on changes to the original selectbox.
 
+<b>Get ID:</b>
+```javascript
+$('#selectbox').BVSelect("getid");
+```
+Returns the ID that was generated to build dropdown, so you can add custom classes.
 
 Settings:
 -
