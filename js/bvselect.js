@@ -2,9 +2,9 @@
     $.fn.BVSelect = function(parameters) {
 
         // VARIABLES
-        var selectorID = $(this).attr("id"); // SELECTOR ID
-        var select = $(this); // NATIVE SELECT OBJECT
-        var randomID = Math.floor(Math.random() * (9999 - 0 + 1)) + 0; // RANDOM ID GENERATED
+        var selectorID = $(this).attr("id"); // Selector ID
+        var select = $(this); // Native Selector Object
+        var randomID = Math.floor(Math.random() * (9999 - 0 + 1)) + 0; // Random ID Generated
         var selectedIDFocus = 0;
 
         // SETUP LIST
@@ -22,7 +22,9 @@
             // ** LIST LI CLICK ** 
             $("#ul_" + randomID).children().click(function() {
                 if ($(this).hasClass("nofocus") == false) {
-                    var index = $(this).index();
+
+                    var index = $(this).index(); // INDEX OF LIST
+                    if( $("#ul_" + randomID+" li").hasClass("nofocus")){ index = index-1; } // Fix for lists with extra Li (Searchbar)
                     if ($(this).hasClass("bv_disabled")) {} else {
                         $("#main_" + randomID).html($(this).text() + " <i id='arrow_" + randomID + "' class='arrows_bv arrow down'></i>");
                         $("#" + selectorID).prop("selectedIndex", index).trigger("change");
