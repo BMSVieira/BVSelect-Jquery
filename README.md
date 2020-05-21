@@ -82,15 +82,18 @@ Attributes:
 | Name | Value | Description |
 | --- | --- | --- |
 | `data-separator` | `true` or `false` | Highlights an option |
-| `data-img` | `Image Source` |  Adds an image to option |
+| `data-img` | `Image Source` |  Adds an Image to option |
+| `data-icon` | `fa fa-hashtag` |  Adds an FontIcon to option, can be used any provider as long it is identical. Images will be prioritized over icons. |
 | `disabled (native)` | `disabled` |  Disables an option |
+
+*To add FontIcons, you must include it's own sources*
 
 <b>Example:</b>
 ```html
 <select id="selectbox3">
     <option value="##" data-separator="true" selected>Select Option</option>
     <option data-img="path/to/img.png" value="--">Cristiano Ronaldo</option>
-    <option data-img="path/to/img.png" value="--" >Lionel Messi </option>
+    <option data-icon="fa fa-hashtag" value="--" >Lionel Messi </option>
     <option data-img="path/to/img.png" value="--" disabled>Neymar Jr. (Disabled)</option>
     <option data-img="path/to/img.png" value="--">Ronaldinho</option>
     <option data-img="path/to/img.png" value="--">Luis Figo</option>
