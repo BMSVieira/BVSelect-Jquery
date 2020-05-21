@@ -19,7 +19,6 @@
                 // Apend li to ul
                 $("#ul_" + randomID).append("<li class='" + is_disabled + " " + is_separator + "'  > "+has_attachment+" " + $(this).text() + "</li>");
             });
-
             // ** LIST LI CLICK ** 
             $("#ul_" + randomID).children().click(function() {
                 if ($(this).hasClass("nofocus") == false) {
@@ -33,7 +32,6 @@
                     }
                 }
             });
-
             // ** SEARCHBAR  **
             $("#input_" + randomID).on("keyup", function() {
                 var value = this.value.toLowerCase().trim();
@@ -58,7 +56,6 @@
                 }
             });
         }
-
         // ON SCROLL EVENT TO PREVENT OUT OF VIEWPORT
         $(window).scroll(function() {
             // If Dropdown in focus
@@ -72,7 +69,6 @@
                 if(DiffBetW > MainDivOff) { FixVerticalViewPort(); }
             }
         });
-   
         // SETUP BASE DIV
         function SetBaseBV(options, config) {
             options.after($('<div id="bv_' + randomID + '" data-search="' + config.searchbox + '" style="width:' + config.width + ';"></div>').addClass('bv_mainselect ').addClass(options.attr('class') || '').addClass(options.attr('disabled') ? 'disabled' : '').attr('tabindex', options.attr('disabled') ? null : '0'));
@@ -110,7 +106,6 @@
             // Append List
             SetListBV(options);
         }
-
         // FIX VIEWPORT OFFSET
         function FixVerticalViewPort() {
             var currentWindowView = $(window).scrollTop() + $(window).height();
@@ -127,7 +122,6 @@
                 $(".bv_ul_inner").css("bottom", "");
             }
         }
-
         // ** ---------- METHODS ----------- **
         if (typeof parameters == 'string') {
 
@@ -144,7 +138,6 @@
             // ** UPDATE **  
             if (parameters == 'update') {
                 this.each(function() {
-
                     var current_id = $(this).next(".bv_mainselect").children().attr("id").match(/\d+/);
                     randomID = current_id;
 
@@ -154,9 +147,17 @@
 
                     // Fetches fields and append to main div
                     SetListBV(select);
-                });
+                });  
             }
-            return this;
+            // ** GET GENERATED ID **  
+            if (parameters == 'getid') {
+                this.each(function() {
+                    var current_id = $(this).next(".bv_mainselect").children().attr("id").match(/\d+/);
+                    randomID = current_id;
+                });
+               return randomID[0];
+            }
+
         } else {
 
             // Default Parameters
@@ -167,15 +168,12 @@
             }
 
             var parameters = $.extend({}, defaults, parameters); 
+            // Hide Native Select
+            $(this).hide();
+
+            // Setup main div
+            SetBaseBV(select, parameters);
+            return this;
         }
-        // ** ---------- END METHODS ----------- **
-
-        // Hide Native Select
-        $(this).hide();
-
-        // Setup main div
-        SetBaseBV(select, parameters);
-
-        return this;
     };
 }(jQuery));
