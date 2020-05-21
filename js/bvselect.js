@@ -1,9 +1,11 @@
 (function($) {
     $.fn.BVSelect = function(parameters) {
 
+        // VARIABLES
         var selectorID = $(this).attr("id"); // SELECTOR ID
         var select = $(this); // NATIVE SELECT OBJECT
         var randomID = Math.floor(Math.random() * (9999 - 0 + 1)) + 0; // RANDOM ID GENERATED
+        var selectedIDFocus = 0;
 
         // SETUP LIST
         function SetListBV(options) {
@@ -19,20 +21,6 @@
                 $("#ul_" + randomID).append("<li class='" + is_disabled + " " + is_separator + "'  > "+has_img+" " + $(this).text() + "</li>");
             });
 
-            // ** MAIN DIV CLICK ** 
-            $("#main_" + randomID).click(function() {
-                // Check if it is open, if yes, close it.
-                if ($("#ul_" + randomID).css('display') == 'block') {
-                    $(".bv_ul_inner").slideUp("fast");
-                    $(".arrows_bv").removeClass("up").addClass("down");
-                } else {
-                    $(".bv_ul_inner").hide();
-                    $("#ul_" + randomID).slideDown("fast");
-                    $(".arrows_bv").removeClass("up").addClass("down");
-                    $("#arrow_" + randomID).removeClass("down").addClass("up");
-                }
-            });
-
             // ** LIST LI CLICK ** 
             $("#ul_" + randomID).children().click(function() {
                 if ($(this).hasClass("nofocus") == false) {
@@ -42,6 +30,7 @@
                         $("#" + selectorID).prop("selectedIndex", index).trigger("change");
                         $("#ul_" + randomID).slideUp("fast");
                         $("#input_" + randomID).val("").keyup();
+                        selectedIDFocus = 0;
                     }
                 }
             });
@@ -50,7 +39,7 @@
             $("#input_" + randomID).on("keyup", function() {
                 var value = this.value.toLowerCase().trim();
                 $("#ul_" + randomID + " li").show().filter(function() {
-                    if ($(this).hasClass("nofocus") == false) { // Se tiver classe nofocus, não procura nesse.
+                    if ($(this).hasClass("nofocus") == false) {
                         return $(this).text().toLowerCase().trim().indexOf(value) == -1;
                     }
                 }).hide();
@@ -62,10 +51,30 @@
                     $("#ul_" + randomID).hide();
                     $("#arrow_" + randomID).removeClass("up").addClass("down");
                     $(".bv_input").val("").keyup();
+                    selectedIDFocus = 0;
                 }
             });
         }
 
+        // ON SCROLL EVENT TO PREVENT OUT OF VIEWPORT
+        $(window).scroll(function() {
+
+            // If Dropdown in focus
+            if(selectedIDFocus != 0)
+            {
+                var currentWindowViewOffSet= $(window).scrollTop() + $(window).height(); // Window Offset
+                var currentElementViewOffSet = $("#main_"+randomID).offset().top; // Main Element Offset
+                var MainDivOff = $("#ul_"+randomID).height(); // Height of the List
+                var DiffBetW = currentWindowViewOffSet-currentElementViewOffSet // Difference between Element and Window
+
+                // If Difference is greater than List height
+                if(DiffBetW > MainDivOff)
+                {
+                    FixVerticalViewPort();
+                }
+            }
+        });
+   
         // SETUP BASE DIV
         function SetBaseBV(options, config) {
 
@@ -82,8 +91,47 @@
             var selected_option = options.find("option:selected").text();
             $("#main_" + randomID).html(selected_option + "<i id='arrow_" + randomID + "' class='arrows_bv arrow down'></i>");
 
+            // ** MAIN DIV CLICK ** 
+            $("#main_" + randomID).click(function() {
+
+                // Check if it is open, if yes, close it.
+                if ($("#ul_" + randomID).css('display') == 'block') {
+                    $(".bv_ul_inner").slideUp("fast");
+                    $(".arrows_bv").removeClass("up").addClass("down");
+                } else {
+                    $(".bv_ul_inner").hide();
+                    $("#ul_" + randomID).slideDown("fast");
+                    $(".arrows_bv").removeClass("up").addClass("down");
+                    $("#arrow_" + randomID).removeClass("down").addClass("up");
+
+                    if(parameters.offset == true)
+                    {
+                        // Fix Vertical ViewPort at END
+                        FixVerticalViewPort();   
+                    }
+                }
+            });
+
             // Append List
             SetListBV(options);
+        }
+
+        // FIX VIEWPORT OFFSET
+        function FixVerticalViewPort()
+        {
+            var currentWindowView = $(window).scrollTop() + $(window).height();
+            var currentElementView = $("#ul_"+randomID+" li:last-child").offset().top;
+            if(currentElementView+5 > currentWindowView)
+            {
+                selectedIDFocus = randomID;
+                $("#ul_" + randomID).css("position", "fixed");
+                $("#ul_" + randomID).css("bottom", "0px");
+
+            } else {
+                selectedIDFocus = 0;
+                $(".bv_ul_inner").css("position", "absolute");
+                $(".bv_ul_inner").css("bottom", "");
+            }
         }
 
         // ** ---------- METHODS ----------- **
@@ -104,13 +152,11 @@
                 this.each(function() {
 
                     var current_id = $(this).next(".bv_mainselect").children().attr("id").match(/\d+/);
-                    var current_searchbox = $(this).next(".bv_mainselect").data('search');
-
                     randomID = current_id;
 
                     // Remove all lines without .nofocus class (search input)
                     $("#ul_" + current_id + " li:not(.nofocus)").remove();
-                    $("#main_" + current_id).off();
+                    $("#main_" + current_id+ "").children().off();
 
                     // Fetches fields and append to main div
                     SetListBV(select);
@@ -122,7 +168,8 @@
             // Default Parameters
             var defaults = {
                 width : "100%", // Width 100%
-                searchbox : false // Searchbox not included
+                searchbox : false, // Searchbox not included
+                offset : true // Fixes Viewport Overflow
             }
 
             var parameters = $.extend({}, defaults, parameters); 
