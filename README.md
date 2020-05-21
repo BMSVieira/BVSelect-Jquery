@@ -61,17 +61,19 @@ Updates current dropdown based on changes to the original selectbox.
 
 Settings:
 -
-| Name | Value | Description |
-| --- | --- | --- |
-| `width` | *px* or *%* | Specify the with of the main element|
-| `searchbox` | *true* or *false* |  Add a searchbox to the list |
+| Name | Value | Default | Description |
+| --- | --- | --- | --- |
+| `width` | `px` or `%` | `100%` |  Specify the width of the main element|
+| `searchbox` | `true` or `false` | `false` |  Add a search box to the list |
+| `offset` | `true` or `false` | `true` | Fixes Viewport Offset |
 
 <b>Example:</b>
 ```javascript
 $(document).ready(function() {
   $('#selectbox').BVSelect({
       width: "33%",
-      searchbox: false
+      searchbox: false,
+      offset: true,   
   });
 });
 ```
@@ -79,9 +81,9 @@ Attributes:
 -
 | Name | Value | Description |
 | --- | --- | --- |
-| `data-separator` | *true* or *false* | Highlight an option |
-| `data-img` | *Image Source* |  Adds an image to option |
-| `disabled (native)` | *disabled* |  Disable an option |
+| `data-separator` | `true` or `false` | Highlights an option |
+| `data-img` | `Image Source` |  Adds an image to option |
+| `disabled (native)` | `disabled` |  Disables an option |
 
 <b>Example:</b>
 ```html
