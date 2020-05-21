@@ -9,16 +9,15 @@
 
         // SETUP LIST
         function SetListBV(options) {
-
             options.find("option").each(function(index, element) {
                 // Separator Element
                 if (element.disabled == true) { var is_disabled = "bv_disabled" } else { is_disabled = "" }
                 // Disabled Element   
                 if ($(this).data('separator') == true) { var is_separator = "bv_separator" } else { is_separator = "" }
-                // Check for Image  
-                if($(this).data('img')){  var has_img = "<img src="+$(this).data('img')+">"; } else { var has_img = "";}
+                // Check for Attachment  
+                if($(this).data("img")) { var has_attachment = "<img src="+$(this).data('img')+">"; } else { if($(this).data("icon")) { var has_attachment =  "<i class='"+$(this).data('icon')+"' aria-hidden='true'></i>"; } else { var has_attachment =  ""; }}
                 // Apend li to ul
-                $("#ul_" + randomID).append("<li class='" + is_disabled + " " + is_separator + "'  > "+has_img+" " + $(this).text() + "</li>");
+                $("#ul_" + randomID).append("<li class='" + is_disabled + " " + is_separator + "'  > "+has_attachment+" " + $(this).text() + "</li>");
             });
 
             // ** LIST LI CLICK ** 
@@ -51,16 +50,17 @@
                     $("#ul_" + randomID).hide();
                     $("#arrow_" + randomID).removeClass("up").addClass("down");
                     $(".bv_input").val("").keyup();
-                    selectedIDFocus = 0;
-                    FixVerticalViewPort();
 
+                    // Reset ViewPort Offset
+                    selectedIDFocus = 0;
+                    $(".bv_ul_inner").css("position", "absolute");
+                    $(".bv_ul_inner").css("bottom", "");
                 }
             });
         }
 
         // ON SCROLL EVENT TO PREVENT OUT OF VIEWPORT
         $(window).scroll(function() {
-
             // If Dropdown in focus
             if(selectedIDFocus != 0)
             {
@@ -68,18 +68,13 @@
                 var currentElementViewOffSet = $("#main_"+randomID).offset().top; // Main Element Offset
                 var MainDivOff = $("#ul_"+randomID).height(); // Height of the List
                 var DiffBetW = currentWindowViewOffSet-currentElementViewOffSet // Difference between Element and Window
-
-                // If Difference is greater than List height
-                if(DiffBetW > MainDivOff)
-                {
-                    FixVerticalViewPort();
-                }
+                // If Difference is greater than List's height
+                if(DiffBetW > MainDivOff) { FixVerticalViewPort(); }
             }
         });
    
         // SETUP BASE DIV
         function SetBaseBV(options, config) {
-
             options.after($('<div id="bv_' + randomID + '" data-search="' + config.searchbox + '" style="width:' + config.width + ';"></div>').addClass('bv_mainselect ').addClass(options.attr('class') || '').addClass(options.attr('disabled') ? 'disabled' : '').attr('tabindex', options.attr('disabled') ? null : '0'));
             $("#bv_" + randomID).append('<div id="main_' + randomID + '" class="bv_atual bv_background"></div><ul id="ul_' + randomID + '" class="bv_ul_inner bv_background"></ul>');
 
@@ -88,7 +83,7 @@
             }
 
             var select_width = $("#main_" + randomID).width();
-            $("#ul_" + randomID).css("width", select_width + 20 + "px");
+            $("#ul_" + randomID).css("width", select_width + 24 + "px");
 
             var selected_option = options.find("option:selected").text();
             $("#main_" + randomID).html(selected_option + "<i id='arrow_" + randomID + "' class='arrows_bv arrow down'></i>");
@@ -106,9 +101,7 @@
                     $(".arrows_bv").removeClass("up").addClass("down");
                     $("#arrow_" + randomID).removeClass("down").addClass("up");
 
-                    if(parameters.offset == true)
-                    {
-                        // Fix Vertical ViewPort at END
+                    if(parameters.offset == true){
                         FixVerticalViewPort();   
                     }
                 }
@@ -119,8 +112,7 @@
         }
 
         // FIX VIEWPORT OFFSET
-        function FixVerticalViewPort()
-        {
+        function FixVerticalViewPort() {
             var currentWindowView = $(window).scrollTop() + $(window).height();
             var currentElementView = $("#ul_"+randomID+" li:last-child").offset().top;
             // +50 to fix outer border
@@ -129,7 +121,6 @@
                 selectedIDFocus = randomID;
                 $("#ul_" + randomID).css("position", "fixed");
                 $("#ul_" + randomID).css("bottom", "0px");
-
             } else {
                 selectedIDFocus = 0;
                 $(".bv_ul_inner").css("position", "absolute");

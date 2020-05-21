@@ -69,11 +69,20 @@ Developed by: Bruno Vieira
 	padding: 12px 28px 10px 10px;
 }
 
+.bv_ul_inner i {
+    color: #464646;
+    font-size: 17pt;
+    margin-right: 10px;
+    float: left;
+    margin-top: -1px;
+    margin-left: 3px;
+}
+
 .bv_ul_inner li img{
 	float: left;
 	margin-right: 11px;
 	position: relative;
-	bottom: 8px;
+	bottom: 6px;
 	max-width: 30px; /* Change to fit your images */
 }
 
