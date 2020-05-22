@@ -48,10 +48,10 @@
                     var SelectedNames = "";
 
                     // Checks if user is holding any below keys
-                    if (event.ctrlKey || event.which == 17 || event.metaKey) // Windows and MAC (Untested)
+                    if (select.is("[multiple]")) // Check if native select has multiple attribute
                     {
-                        if (select.is("[multiple]")) // Check if native select has multiple attribute
-                        {
+
+                        
                             event.preventDefault();
                             $("#" + selectorID).removeAttr("selected"); // Removes all selections
                             if (selectedMultiple.indexOf(index) > -1) {
@@ -79,7 +79,7 @@
                             }
                             // Adds the texto o the main DIV
                             $("#main_" + randomID).html(SelectedNames + " <i id='arrow_" + randomID + "' class='arrows_bv arrow down'></i>");
-                        }
+                        
                     } else {
                         if ($(this).hasClass("bv_disabled")) {} else {
                             $("#main_" + randomID).html($(this).text() + " <i id='arrow_" + randomID + "' class='arrows_bv arrow down'></i>");
@@ -234,7 +234,7 @@
                 searchbox: false, // Searchbox not included
                 offset: true // Fixes Viewport Overflow
             }
-
+            
             var parameters = $.extend({}, defaults, parameters);
             // Hide Native Select
             $(this).hide();
