@@ -5,35 +5,95 @@
         var selectorID = $(this).attr("id"); // Selector ID
         var select = $(this); // Native Selector Object
         var randomID = Math.floor(Math.random() * (9999 - 0 + 1)) + 0; // Random ID Generated
-        var selectedIDFocus = 0;
+        var selectedIDFocus = 0; // Save wich dropdown is currently open
+        var selectedMultiple = []; //
 
         // SETUP LIST
         function SetListBV(options) {
             options.find("option").each(function(index, element) {
                 // Separator Element
-                if (element.disabled == true) { var is_disabled = "bv_disabled" } else { is_disabled = "" }
+                if (element.disabled == true) {
+                    var is_disabled = "bv_disabled"
+                } else {
+                    is_disabled = ""
+                }
                 // Disabled Element   
-                if ($(this).data('separator') == true) { var is_separator = "bv_separator" } else { is_separator = "" }
+                if ($(this).data('separator') == true) {
+                    var is_separator = "bv_separator"
+                } else {
+                    is_separator = ""
+                }
                 // Check for Attachment  
-                if($(this).data("img")) { var has_attachment = "<img src="+$(this).data('img')+">"; } else { if($(this).data("icon")) { var has_attachment =  "<i class='"+$(this).data('icon')+"' aria-hidden='true'></i>"; } else { var has_attachment =  ""; }}
+                if ($(this).data("img")) {
+                    var has_attachment = "<img src=" + $(this).data('img') + ">";
+                } else {
+                    if ($(this).data("icon")) {
+                        var has_attachment = "<i class='" + $(this).data('icon') + "' aria-hidden='true'></i>";
+                    } else {
+                        var has_attachment = "";
+                    }
+                }
                 // Apend li to ul
-                $("#ul_" + randomID).append("<li class='" + is_disabled + " " + is_separator + "'  > "+has_attachment+" " + $(this).text() + "</li>");
+                $("#ul_" + randomID).append("<li class='" + is_disabled + " " + is_separator + "'  > " + has_attachment + " " + $(this).text() + "</li>");
             });
-            // ** LIST LI CLICK ** 
-            $("#ul_" + randomID).children().click(function() {
-                if ($(this).hasClass("nofocus") == false) {
 
-                    var index = $(this).index(); // INDEX OF LIST
-                    if( $("#ul_" + randomID+" li").hasClass("nofocus")){ index = index-1; } // Fix for lists with extra Li (Searchbar)
-                    if ($(this).hasClass("bv_disabled")) {} else {
-                        $("#main_" + randomID).html($(this).text() + " <i id='arrow_" + randomID + "' class='arrows_bv arrow down'></i>");
-                        $("#" + selectorID).prop("selectedIndex", index).trigger("change");
-                        $("#ul_" + randomID).slideUp("fast");
-                        $("#input_" + randomID).val("").keyup();
-                        selectedIDFocus = 0;
+            // ** SELECT OPTION  **
+            $("#ul_" + randomID).children().click(function(event) {
+                if ($(this).hasClass("nofocus") || $(this).hasClass("bv_disabled")) {} else // if this li is searchbox
+                {
+                    var index = $(this).index(); // Index of list
+                    if ($("#ul_" + randomID + " li").hasClass("nofocus")) {
+                        index = index - 1;
+                    } // Fix for lists with extra Li (Searchbar)
+                    var SelectedNames = "";
+
+                    // Checks if user is holding any below keys
+                    if (event.ctrlKey || event.which == 17 || event.metaKey) // Windows and MAC (Untested)
+                    {
+                        if (select.is("[multiple]")) // Check if native select has multiple attribute
+                        {
+                            event.preventDefault();
+                            $("#" + selectorID).removeAttr("selected"); // Removes all selections
+                            if (selectedMultiple.indexOf(index) > -1) {
+                                $('#' + selectorID + " option:eq(" + index + ")").removeAttr("selected");
+                                var index_test = selectedMultiple.indexOf(index);
+                                selectedMultiple.splice(index_test, 1);
+                            } else {
+                                selectedMultiple.push(index);
+                            } // Adds to array 
+
+                            // Check if array is empty, if it is, gets the first option
+                            if (selectedMultiple.length == 0) {
+                                SelectedNames = options.find("option:eq(0)").text();
+                            } else {
+
+                                for (var i = 0; i < selectedMultiple.length; i++) {
+                                    var indexValFromArray = selectedMultiple[i];
+                                    $('#' + selectorID + " option:eq(" + indexValFromArray + ")").prop('selected', true);
+                                    if ($('#' + selectorID + " option:eq(" + indexValFromArray + ")").text() != "undefined") // Removes the first selection
+                                    {
+                                        SelectedNames = SelectedNames + ", " + $('#' + selectorID + " option:eq(" + indexValFromArray + ")").text();
+                                    }
+                                }
+                                SelectedNames = SelectedNames.substring(2);
+                            }
+                            // Adds the texto o the main DIV
+                            $("#main_" + randomID).html(SelectedNames + " <i id='arrow_" + randomID + "' class='arrows_bv arrow down'></i>");
+                        }
+                    } else {
+                        if ($(this).hasClass("bv_disabled")) {} else {
+                            $("#main_" + randomID).html($(this).text() + " <i id='arrow_" + randomID + "' class='arrows_bv arrow down'></i>");
+                            $("#" + selectorID).removeAttr("selected"); // Removes all selected options in case of used multiple before
+                            selectedMultiple = []; // Empty array of Multiple Selected
+                            $("#" + selectorID).prop("selectedIndex", index).trigger("change");
+                            $("#ul_" + randomID).slideUp("fast");
+                            $("#input_" + randomID).val("").keyup();
+                            selectedIDFocus = 0;
+                        }
                     }
                 }
             });
+
             // ** SEARCHBAR  **
             $("#input_" + randomID).on("keyup", function() {
                 var value = this.value.toLowerCase().trim();
@@ -58,19 +118,22 @@
                 }
             });
         }
+
         // ON SCROLL EVENT TO PREVENT OUT OF VIEWPORT
         $(window).scroll(function() {
             // If Dropdown in focus
-            if(selectedIDFocus != 0)
-            {
-                var currentWindowViewOffSet= $(window).scrollTop() + $(window).height(); // Window Offset
-                var currentElementViewOffSet = $("#main_"+randomID).offset().top; // Main Element Offset
-                var MainDivOff = $("#ul_"+randomID).height(); // Height of the List
-                var DiffBetW = currentWindowViewOffSet-currentElementViewOffSet // Difference between Element and Window
+            if (selectedIDFocus != 0) {
+                var currentWindowViewOffSet = $(window).scrollTop() + $(window).height(); // Window Offset
+                var currentElementViewOffSet = $("#main_" + randomID).offset().top; // Main Element Offset
+                var MainDivOff = $("#ul_" + randomID).height(); // Height of the List
+                var DiffBetW = currentWindowViewOffSet - currentElementViewOffSet // Difference between Element and Window
                 // If Difference is greater than List's height
-                if(DiffBetW > MainDivOff) { FixVerticalViewPort(); }
+                if (DiffBetW > MainDivOff) {
+                    FixVerticalViewPort();
+                }
             }
         });
+
         // SETUP BASE DIV
         function SetBaseBV(options, config) {
             options.after($('<div id="bv_' + randomID + '" data-search="' + config.searchbox + '" style="width:' + config.width + ';"></div>').addClass('bv_mainselect ').addClass(options.attr('class') || '').addClass(options.attr('disabled') ? 'disabled' : '').attr('tabindex', options.attr('disabled') ? null : '0'));
@@ -84,6 +147,9 @@
             $("#ul_" + randomID).css("width", select_width + 24 + "px");
 
             var selected_option = options.find("option:selected").text();
+            if (selected_option == "") {
+                var selected_option = options.find("option:eq(0)").text();
+            }
             $("#main_" + randomID).html(selected_option + "<i id='arrow_" + randomID + "' class='arrows_bv arrow down'></i>");
 
             // ** MAIN DIV CLICK ** 
@@ -99,22 +165,21 @@
                     $(".arrows_bv").removeClass("up").addClass("down");
                     $("#arrow_" + randomID).removeClass("down").addClass("up");
 
-                    if(parameters.offset == true){
-                        FixVerticalViewPort();   
+                    if (parameters.offset == true) {
+                        FixVerticalViewPort();
                     }
                 }
             });
-
             // Append List
             SetListBV(options);
         }
+
         // FIX VIEWPORT OFFSET
         function FixVerticalViewPort() {
             var currentWindowView = $(window).scrollTop() + $(window).height();
-            var currentElementView = $("#ul_"+randomID+" li:last-child").offset().top;
+            var currentElementView = $("#ul_" + randomID + " li:last-child").offset().top;
             // +50 to fix outer border
-            if(Math.round(currentElementView+50) > Math.round(currentWindowView))
-            {
+            if (Math.round(currentElementView + 50) > Math.round(currentWindowView)) {
                 selectedIDFocus = randomID;
                 $("#ul_" + randomID).css("position", "fixed");
                 $("#ul_" + randomID).css("bottom", "0px");
@@ -137,6 +202,7 @@
                     }
                 });
             }
+
             // ** UPDATE **  
             if (parameters == 'update') {
                 this.each(function() {
@@ -145,31 +211,31 @@
 
                     // Remove all lines without .nofocus class (search input)
                     $("#ul_" + current_id + " li:not(.nofocus)").remove();
-                    $("#main_" + current_id+ "").children().off();
+                    $("#main_" + current_id + "").children().off();
 
                     // Fetches fields and append to main div
                     SetListBV(select);
-                });  
+                });
             }
+
             // ** GET GENERATED ID **  
             if (parameters == 'getid') {
                 this.each(function() {
                     var current_id = $(this).next(".bv_mainselect").children().attr("id").match(/\d+/);
                     randomID = current_id;
                 });
-               return randomID[0];
+                return randomID[0];
             }
-
         } else {
 
             // Default Parameters
             var defaults = {
-                width : "100%", // Width 100%
-                searchbox : false, // Searchbox not included
-                offset : true // Fixes Viewport Overflow
+                width: "100%", // Width 100%
+                searchbox: false, // Searchbox not included
+                offset: true // Fixes Viewport Overflow
             }
 
-            var parameters = $.extend({}, defaults, parameters); 
+            var parameters = $.extend({}, defaults, parameters);
             // Hide Native Select
             $(this).hide();
 
