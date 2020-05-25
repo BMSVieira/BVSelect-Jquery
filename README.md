@@ -1,4 +1,4 @@
-BVSelect - Jquery
+BVSelect - JQuery
 --
 <p align="center">
 <img width="500" src="https://bmsvieira.github.io/BVSelect/demo-template/images/BV.png">
@@ -12,6 +12,10 @@ Even though this replaces native select options, you can still use <b>Form Submi
 Demo:
 -
  https://bmsvieira.github.io/BVSelect/
+ 
+ <b>VanillaJS Version:</b>
+ 
+ https://github.com/BMSVieira/BVSelect-VanillaJS
 
 Features:
 -
