@@ -1,7 +1,7 @@
-BVSelect - Jquery Plugin
+BVSelect - Jquery
 --
 <p align="center">
-<img width="600" src="http://bvcode.pt/code/plugins/bvselect/images/BV.png">
+<img width="600" src="https://bmsvieira.github.io/BVSelect/demo-template/images/BV.png">
 </p>
 <br>
 
