@@ -39,6 +39,7 @@
 
             // ** SELECT OPTION  **
             $("#ul_" + randomID).children().click(function(event) {
+
                 if ($(this).hasClass("nofocus") || $(this).hasClass("bv_disabled")) {} else // if this li is searchbox
                 {
                     var index = $(this).index(); // Index of list
@@ -50,8 +51,6 @@
                     // Checks if user is holding any below keys
                     if (select.is("[multiple]")) // Check if native select has multiple attribute
                     {
-
-                        
                             event.preventDefault();
                             $("#" + selectorID).removeAttr("selected"); // Removes all selections
                             if (selectedMultiple.indexOf(index) > -1) {
@@ -155,6 +154,9 @@
             // ** MAIN DIV CLICK ** 
             $("#main_" + randomID).click(function() {
 
+                var select_width = $("#main_" + randomID).width();
+                $("#ul_" + randomID).css("width", select_width + 24 + "px");
+
                 // Check if it is open, if yes, close it.
                 if ($("#ul_" + randomID).css('display') == 'block') {
                     $(".bv_ul_inner").slideUp("fast");
@@ -164,7 +166,6 @@
                     $("#ul_" + randomID).slideDown("fast");
                     $(".arrows_bv").removeClass("up").addClass("down");
                     $("#arrow_" + randomID).removeClass("down").addClass("up");
-
                     if (parameters.offset == true) {
                         FixVerticalViewPort();
                     }
